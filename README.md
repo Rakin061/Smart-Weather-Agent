@@ -25,11 +25,11 @@ an NLP based speech has been built to send as the final response to the user wit
 
 # Workflow of the Application
 
-
 Smart-Weather-Agent has been designed as a three tier architecture where this application lies in the first block and flask-socketio has been used to 
-communicate with RESTFUL Web Services by flask Request-Response mechanism
-    * [Dialogflow](https://cloud.google.com/dialogflow) is responsible for initializing the NLP services. 
-    * Knowledge base has been hosted to [GCP](https://cloud.google.com/)
+communicate with RESTFUL Web Services by flask Request-Response mechanism  
+
+  * [Dialogflow](https://cloud.google.com/dialogflow) is responsible for initializing the NLP services. 
+  * Knowledge base has been hosted to [GCP](https://cloud.google.com/)
 
 [WeatherAPI-Python]() (Submodule of this repository) written as a flask web service has been placed in the second tier and acts as a middleware in between Dialogflow 
 and OpenWeatherAPI 
