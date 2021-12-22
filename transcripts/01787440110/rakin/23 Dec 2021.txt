@@ -1,0 +1,93 @@
+
+
+ || Session_ID:- 07956285-6d19-2fc8-e50c-70d8fb3ae32e ||
+
+
+
+       rakin  ( Thursday 5:28am ) :-- hello 
+
+
+
+       Weather-Agent  ( Thursday 5:28am ) :-- Good day!  rakin. 
+ How can I help you?? 
+
+
+
+       rakin  ( Thursday 5:28am ) :-- what is the weather in dhaka today 
+
+
+
+       Weather-Agent  ( Thursday 5:28am ) :-- Please Enter the City name again !! 
+
+
+
+       rakin  ( Thursday 5:28am ) :-- dhaka 
+
+
+
+       Weather-Agent  ( Thursday 5:28am ) :-- Hello !! Today the weather in Dhaka is : Mist and the temperature is 16.99 C.  Thanks!! 
+
+
+
+       rakin  ( Thursday 5:28am ) :-- what about tokyo 
+
+
+
+       Weather-Agent  ( Thursday 5:28am ) :-- I am sorry! rakin. Please call 16205 for further assistance. <br /> Email:- contact.center@<a href="http://www.bankasia-bd.com">bankasia-bd.com</a> 
+
+
+
+       Weather-Agent  ( Thursday 5:30am ) :-- Hey!! rakin. I'm eagerly waiting for your response. </br> Do you wish to continue chatting ?? 
+
+
+
+       rakin  ( Thursday 5:31am ) :-- yes 
+
+
+
+       Weather-Agent  ( Thursday 5:31am ) :-- Ok! rakin. Then, how can help you ?? 
+
+
+
+       rakin  ( Thursday 5:31am ) :-- what about tokyo 
+
+
+
+       Weather-Agent  ( Thursday 5:31am ) :-- Hello !! Today the weather in Tokyo is : Clouds and the temperature is 6.80 C.  Thanks!! 
+
+
+
+       Weather-Agent  ( Thursday 5:33am ) :-- Hey!! rakin. I'm eagerly waiting for your response. </br> Do you wish to continue chatting ?? 
+
+
+
+       rakin  ( Thursday 5:34am ) :-- yes 
+
+
+
+       Weather-Agent  ( Thursday 5:34am ) :-- Ok! rakin. Then, how can help you ?? 
+
+
+
+       rakin  ( Thursday 5:34am ) :-- lsjflsljfj 
+
+
+
+       Weather-Agent  ( Thursday 5:34am ) :-- I am sorry ! rakin. my response is limited !! 
+
+
+
+       rakin  ( Thursday 5:34am ) :-- sjflsjjfs 
+
+
+
+       Weather-Agent  ( Thursday 5:34am ) :-- I am sorry ! rakin. I can' help you providing weather information !! Thanks !! 
+
+
+
+       Weather-Agent  ( Thursday 5:36am ) :-- Hey!! rakin. I'm eagerly waiting for your response. </br> Do you wish to continue chatting ?? 
+
+
+
+       Weather-Agent  ( Thursday 5:37am ) :-- Thanks!! for using this chatbot, rakin.  Have a nice day!! 
+
