@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head >
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <base target="_blank" />
+  <title>Weather Agent-Chatting Page</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+
+    <script type=text/javascript>
+
+        document.addEventListener("DOMContentLoaded",function () {
+
+            let idle_flag=0;
+            let matching_flag=0;
+            let idleTime = 180;
+            let idleInterval,d,x,full,resp,resp1;
+
+            let channel = "/chat";
+            let socket = io.connect('http://' + document.domain + ':' + location.port + channel);
+
+            let author=document.cookie
+                    .split('; ')
+                    .find(row => row.startsWith('realtime-chat-nickname'))
+                    .split('=')[1];
+
+
+            let mobile_no=document.cookie
+                    .split('; ')
+                    .find(row => row.startsWith('mobile_number'))
+                    .split('=')[1];
+
+
+            let session=document.cookie
+                    .split('; ')
+                    .find(row => row.startsWith('session_id'))
+                    .split('=')[1];
+
+            //Increment the idle time counter every minute.
+            console.log("Timer Starts....");
+
+            idleInterval = setInterval(timerIncrement, 1000); // 1 minute
+
+            //Zero the idle timer on mouse movement.
+
+            document.addEventListener("mousemove", (function (e) {
+
+              idleTime = 180;
+            }));
+
+            document.addEventListener("keypress", (function (e) {
+
+              idleTime = 180;
+            }));
+
+
+            const eng=document.querySelector("#english");
+            eng.addEventListener("click",()=>{
+              alert(author+", Language will be changed to English....");
+              window.location="/chatting";
+            });
+
+            const reset=document.querySelector("#reset");
+            reset.addEventListener("click",()=>{
+                alert(author+", Your chat history will be cleared....");
+                window.location="/chatting";
+            });
+
+
+
+            function formatDate(date, format, utc) {
+              let MMMM = ["\x00", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+              let MMM = ["\x01", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+              let dddd = ["\x02", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+              let ddd = ["\x03", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+              function ii(i, len) {
+                  let s = i + "";
+                  len = len || 2;
+                  while (s.length < len) s = "0" + s;
+                  return s;
+              }
+
+              let y = utc ? date.getUTCFullYear() : date.getFullYear();
+              format = format.replace(/(^|[^\\])yyyy+/g, "$1" + y);
+              format = format.replace(/(^|[^\\])yy/g, "$1" + y.toString().substr(2, 2));
+              format = format.replace(/(^|[^\\])y/g, "$1" + y);
+
+              let M = (utc ? date.getUTCMonth() : date.getMonth()) + 1;
+              format = format.replace(/(^|[^\\])MMMM+/g, "$1" + MMMM[0]);
+              format = format.replace(/(^|[^\\])MMM/g, "$1" + MMM[0]);
+              format = format.replace(/(^|[^\\])MM/g, "$1" + ii(M));
+              format = format.replace(/(^|[^\\])M/g, "$1" + M);
+
+              let d = utc ? date.getUTCDate() : date.getDate();
+              format = format.replace(/(^|[^\\])dddd+/g, "$1" + dddd[0]);
+              format = format.replace(/(^|[^\\])ddd/g, "$1" + ddd[0]);
+              format = format.replace(/(^|[^\\])dd/g, "$1" + ii(d));
+              format = format.replace(/(^|[^\\])d/g, "$1" + d);
+
+              let H = utc ? date.getUTCHours() : date.getHours();
+              format = format.replace(/(^|[^\\])HH+/g, "$1" + ii(H));
+              format = format.replace(/(^|[^\\])H/g, "$1" + H);
+
+              let h = H > 12 ? H - 12 : H == 0 ? 12 : H;
+              format = format.replace(/(^|[^\\])hh+/g, "$1" + ii(h));
+              format = format.replace(/(^|[^\\])h/g, "$1" + h);
+
+              let m = utc ? date.getUTCMinutes() : date.getMinutes();
+              format = format.replace(/(^|[^\\])mm+/g, "$1" + ii(m));
+              format = format.replace(/(^|[^\\])m/g, "$1" + m);
+
+              let s = utc ? date.getUTCSeconds() : date.getSeconds();
+              format = format.replace(/(^|[^\\])ss+/g, "$1" + ii(s));
+              format = format.replace(/(^|[^\\])s/g, "$1" + s);
+
+              let f = utc ? date.getUTCMilliseconds() : date.getMilliseconds();
+              format = format.replace(/(^|[^\\])fff+/g, "$1" + ii(f, 3));
+              f = Math.round(f / 10);
+              format = format.replace(/(^|[^\\])ff/g, "$1" + ii(f));
+              f = Math.round(f / 10);
+              format = format.replace(/(^|[^\\])f/g, "$1" + f);
+
+              let T = H < 12 ? "AM" : "PM";
+              format = format.replace(/(^|[^\\])TT+/g, "$1" + T);
+              format = format.replace(/(^|[^\\])T/g, "$1" + T.charAt(0));
+
+              let t = T.toLowerCase();
+              format = format.replace(/(^|[^\\])tt+/g, "$1" + t);
+              format = format.replace(/(^|[^\\])t/g, "$1" + t.charAt(0));
+
+              let tz = -date.getTimezoneOffset();
+              let K = utc || !tz ? "Z" : tz > 0 ? "+" : "-";
+              if (!utc) {
+                  tz = Math.abs(tz);
+                  let tzHrs = Math.floor(tz / 60);
+                  let tzMin = tz % 60;
+                  K += ii(tzHrs) + ":" + ii(tzMin);
+              }
+              format = format.replace(/(^|[^\\])K/g, "$1" + K);
+
+              let day = (utc ? date.getUTCDay() : date.getDay()) + 1;
+              format = format.replace(new RegExp(dddd[0], "g"), dddd[day]);
+              format = format.replace(new RegExp(ddd[0], "g"), ddd[day]);
+
+              format = format.replace(new RegExp(MMMM[0], "g"), MMMM[M]);
+              format = format.replace(new RegExp(MMM[0], "g"), MMM[M]);
+
+              format = format.replace(/\\(.)/g, "$1");
+
+              return format;
+          }
+
+            function timerIncrement() {
+
+                idleTime = idleTime - 1;
+
+                if(idleTime>=0)
+                document.getElementById("displayDiv").innerHTML = " <strong>  Timer: " + idleTime+" </strong>";
+
+
+                if (idleTime == 0) { // 3 minutes
+
+                        resp="Thanks!! for using this chatbot, "+ author;
+                        resp1= "Have a nice day!! ";
+
+                    idle_flag=1;
+
+                    d = new Date();
+                    full=formatDate(d, "d MMM yyyy");
+                    x = formatDate(d, "dddd h:mmtt");
+
+                    let markup_bot=  "<tr><td class='text-right botresponsecssmaya'><img src='static/maya1.jpg' alt='Avatar' class='avatar'><small class='text-muted'>Agent:--"+x+"</small></td></tr>";
+                    let markup1 = "<tr><td class='text-right botresponsecss' style='line-height: 25px'>" + resp + "</td></tr>";
+                    let markup2 = "<tr><td class='text-right botresponsecss' style='line-height: 25px'>" + resp1 + "</td></tr>";
+
+                    let tblconv=document.querySelector("#tblconv");
+
+                    tblconv.innerHTML+=markup_bot;
+                    tblconv.innerHTML+=markup1;
+
+
+                    let scrollingElement = document.querySelector("#tbldiv");
+                    scrollingElement.scrollTo(0,5000000);
+                    let messageText=document.querySelector("#messageText")
+                    messageText.value="";
+
+                    socket.emit('transcript_bot', { data: { message: resp+".  "+resp1, author: author, Session: session, mobile_no: mobile_no, full:full, time:x } });
+
+                    setTimeout(function(){
+
+                        tblconv.innerHTML+=markup2;
+                        let scrollingElement = document.querySelector("#tbldiv");
+                        scrollingElement.scrollTo(0,5000000);
+                        messageText.value="";
+
+
+                    }, 3000);
+
+                    setTimeout(extra_interval, 10000);
+
+                    function extra_interval(){
+                        window.location="/";
+                    }
+                }
+
+                else if(idleTime == 90){
+
+                    d = new Date();
+                    full=formatDate(d, "d MMM yyyy");
+                    x = formatDate(d, "dddd h:mmtt");
+
+                    let markup_bot=  "<tr><td class='text-right botresponsecssmaya'><img src='static/maya1.jpg' alt='Avatar' class='avatar'><small class='text-muted'>Agent:--"+x+"</small></td></tr>";
+                    resp="Hey!! "+author+". I'm eagerly waiting for your response. </br> Do you wish to continue chatting ?? ";
+
+                    idle_flag=1;
+                    matching_flag=0;
+
+                    let markup1 = "<tr><td class='text-right botresponsecss' style='line-height: 25px'>" + resp + "</td></tr>";
+
+                    tblconv.innerHTML+=markup_bot;
+                    tblconv.innerHTML+=markup1;
+
+                    let scrollingElement = document.querySelector("#tbldiv");
+                    scrollingElement.scrollTo(0,5000000);
+                    let messageText=document.querySelector("#messageText")
+                    messageText.value="";
+
+                    socket.emit('transcript_bot', { data: { message: resp, author: author, Session: session, mobile_no: mobile_no, full:full, time:x } });
+
+                }
+
+            }
+
+            (function() {
+
+                let receivedMsg;
+                let flag=0;
+                let password_flag=0;
+                let resp;
+
+                socket.on("message", function (message) {
+
+                    console.log("Message event......")
+                    receivedMsg = message;
+                    refreshMessages(message);
+                 });
+                socket.on("response", function (message) {
+
+                    console.log("Response event....");
+                    receivedMsg = message;
+                    console.log("message---->",receivedMsg)
+                    console.log("resp---->",resp )
+                    refreshMessages(message);
+                 });
+
+               function refreshMessages(message) {
+
+                resp=message.data.message;
+                function urlifyy(text) {
+                  let urlRegex = /(([a-z]+:\/\/)?(([a-z0-9\-]+\.)+([a-z]{2}|aero|arpa|biz|com|coop|edu|gov|info|int|jobs|mil|museum|name|nato|net|org|pro|travel|local|internal))(:[0-9]{1,5})?(\/[a-z0-9_\-\.~]+)*(\/([a-z0-9_\-\.]*)(\?[a-z0-9+_\-\.%=&amp;]*)?)?(#[a-zA-Z0-9!$&'()*+.=-_~:@/?]*)?)(\s+|$)/gi;
+                  str1 = text.replace(/\\n/g, '<br />');
+                  return str1.replace(urlRegex, function(url) {
+
+                      if(url.indexOf("http://")== -1 && url.indexOf("www.") >= 0 && url.indexOf("https://")== -1){ return '<a href="'+ 'http://' + url + '">' + url + '</a>';}
+                      else if (url.indexOf("http://")== -1 && url.indexOf("www.")== -1 && url.indexOf("https://")== -1) {return '<a href="'+ 'http://www.' + url + '">' + url + '</a>';}
+                      else {return '<a href="' + url + '">' + url + '</a>';}
+                    });
+                  }
+
+
+                flag=0;
+
+                fallback1="I am sorry! X, Please call 01787440110 for further assistance. \\n Email:- salmankaderrakin@gmail.com";
+                fallback2="My response is limited! X, Please call 01787440110 for further assistance. \\n Email:- salmankaderrakin@gmail.com";
+                fallback3="I can't answer at this moment X, Please call 01787440110 for further assistance. \\n Email:- salmankaderrakin@gmail.com";
+
+
+                if(resp.indexOf(" X,")!= -1 ){
+
+                          resp=resp.replace(/X,/g,author+".");
+                          console.log(resp);
+                }
+
+                if(resp.indexOf("Hello!")!= -1 ){
+
+                          resp=resp+"  "+author+". \\n How can I help you??";
+                          console.log(resp);
+                }
+                else if(resp.indexOf("Hi!")!= -1 ){
+
+                          resp=resp+"  "+author+". \\n How may I help you??";
+                          console.log(resp);
+                }
+                else if(resp.indexOf("Greetings!")!= -1 ){
+
+                          resp=resp+"  "+author+". \n How can I help you??";
+                }
+                else if(resp.indexOf("Good day!")!= -1 ){
+
+                          resp=resp+"  "+author+". \n How can I help you??";
+                }
+                else if(resp.indexOf("Hey!")!= -1 ){
+
+                          resp=resp+"  "+author+". How can I help you??";
+                }
+
+
+                resp=urlifyy(resp);
+
+                d = new Date();
+                full=formatDate(d, "dddd h:mmtt d MMM yyyy");
+                x = formatDate(d, "dddd h:mmtt");
+
+
+                let markup_bot=  "<tr><td class='text-right botresponsecssmaya'><img src='static/maya1.jpg' alt='Avatar' class='avatar'><small class='text-muted'>Agent:--"+x+"</small></td></tr>";
+                let markup = "<tr><td class='text-right botresponsecss'>" + resp + "</td></tr>";
+
+                let tblconv=document.querySelector("#tblconv")
+                tblconv.innerHTML+=markup_bot;
+                tblconv.innerHTML+=markup;
+
+                let scrollingElement = document.querySelector("#tbldiv");
+                scrollingElement.scrollTo(0,5000000);
+                document.querySelector("#messageText").value="";
+
+
+                 d = new Date();
+                 full=formatDate(d, "d MMM yyyy");
+                 x = formatDate(d, "dddd h:mmtt");
+
+
+
+                if (flag==0)
+                  socket.emit('transcript_bot', { data: { message: resp, author: author, Session: session, mobile_no: mobile_no, full:full, time:x } });
+                else{
+                      alert("Flag mismatch");
+                      return;
+                }
+
+              }
+
+
+              (function () {
+
+                console.log("Login Block..");
+
+                if (typeof author === 'undefined') {
+
+                   console.log("Login If....");
+                   window.location = "/";
+                } else {
+                  console.log("Login Else....");
+
+                  d = new Date();
+                  full=formatDate(d, "dddd h:mmtt d MMM yyyy");
+                  x = formatDate(d, "dddd h:mmtt");
+
+
+
+                  console.log(author,mobile_no,session)
+
+                  let res=" Hello!! "+author+ ".";
+                  let markup_bot=  "<tr><td class='text-right botresponsecssmaya'><img src='static/maya1.jpg' alt='Avatar' class='avatar'><small class='text-muted' style='bottom:5px'>Agent:--"+x+"</small></td></tr>";
+                  let markup = "<tr><td class='text-right botresponsecss'>" + res+ "</td></tr>";
+                  resp="Greetings from the Weather Agent !! I can provide you weather information of all major cities around the world!! ";
+
+                  console.log(author);
+                  let markup1 = "<tr><td class='text-right botresponsecss' style='line-height: 25px'>" + resp + "</td></tr>";
+
+                  let tblconv=document.querySelector("#tblconv");
+                  tblconv.innerHTML+=markup_bot;
+                  tblconv.innerHTML+=markup;
+                  tblconv.innerHTML+=markup1;
+
+                   //flag=1;
+
+
+
+                  document.querySelector("#sendMessage").addEventListener("click", function () {
+
+
+                    //alert(flag);
+
+                      let msg=document.querySelector('#messageText').value;
+
+                      if (msg !== "")
+                          sendMessage();
+                  });
+
+                  document.querySelector('#messageText').addEventListener("keyup",(function (e) {
+                    if (e.keyCode == 13) {
+                      //Session_flow();
+
+                      let msg=document.querySelector('#messageText').value;
+
+                      //console.log(msg);
+
+                      if (msg !== '' )
+                        sendMessage();
+                    }
+                  }))
+                }
+
+                function sendMessage() {
+
+
+                  console.log("Send Block...");
+
+
+                  let message = document.querySelector("#messageText").value;
+
+
+                  console.log(message);
+
+
+                   /**************************************Jodi radio contetn na thake*************************************************/
+
+
+                  if(message != ''){
+                        function urlify(text) {
+                          let urlRegex = /(([a-z]+:\/\/)?(([a-z0-9\-]+\.)+([a-z]{2}|aero|arpa|biz|com|coop|edu|gov|info|int|jobs|mil|museum|name|nato|net|org|pro|travel|local|internal))(:[0-9]{1,5})?(\/[a-z0-9_\-\.~]+)*(\/([a-z0-9_\-\.]*)(\?[a-z0-9+_\-\.%=&amp;]*)?)?(#[a-zA-Z0-9!$&'()*+.=-_~:@/?]*)?)(\s+|$)/gi;
+                          str1 = text.replace(/\\n/g, '<br />');
+                          return str1.replace(urlRegex, function(url) {
+
+                              if(url.indexOf("http://")== -1 && url.indexOf("www.") >= 0 && url.indexOf("https://")== -1){ return '<a href="'+ 'http://' + url + '">' + url + '</a>';}
+                              else if (url.indexOf("http://")== -1 && url.indexOf("www.")== -1 && url.indexOf("https://")== -1) {return '<a href="'+ 'http://www.' + url + '">' + url + '</a>';}
+                              else {return '<a href="' + url + '">' + url + '</a>';}
+                           });
+                        }
+                      }
+
+
+                 if(idle_flag==1) {
+
+                     let message = document.querySelector("#messageText").value;
+
+                      idle_flag=0;
+                      let username = author;
+                      let markup_user="<tr><td class='usersaycssid'><small class='text-muted'>" + author + " (You):</small></td></tr>";
+                      let markup = "<tr><td class='usersaycss'>" + message + "</td></tr>";
+                      let tblconv=document.querySelector("#tblconv");
+                      tblconv.innerHTML+=markup_user;
+                      tblconv.innerHTML+=markup;
+                      let scrollingElement = document.querySelector("#tbldiv");
+                      scrollingElement.scrollTo(0,5000000);
+
+
+
+                      d = new Date();
+                      full=formatDate(d, "d MMM yyyy");
+                      x = formatDate(d, "dddd h:mmtt");
+
+                       socket.emit('transcript_user', { data: { message: message, author: author, Session: session, mobile_no: mobile_no, full:full, time:x } });
+
+
+                      if(message.toUpperCase()=="NO" ){
+
+                              //alert(bangla_flag);
+
+
+                                  resp="OK!! "+username+". Bye for now!!";
+                                  resp1= "I will be always present when You will need me!! ";
+
+
+
+                              let markup_bot=  "<tr><td class='text-right botresponsecssmaya'><img src='static/maya1.jpg' alt='Avatar' class='avatar'><small class='text-muted'>Agent:--"+x+"</small></td></tr>";
+
+                              let markup1 = "<tr><td class='text-right botresponsecss' style='line-height: 25px'>" + resp + "</td></tr>";
+                              let markup2 = "<tr><td class='text-right botresponsecss' style='line-height: 25px'>" + resp1 + "</td></tr>";
+
+                              let tblconv=document.querySelector("#tblconv");
+                              tblconv.innerHTML+=markup_bot;
+                              tblconv.innerHTML+=markup1;
+                              tblconv.innerHTML+=markup2;
+                              let scrollingElement = document.querySelector("#tbldiv");
+                              scrollingElement.scrollTo(0,5000000);
+                              document.querySelector("#messageText").value="";
+
+                              socket.emit('transcript_bot', { data: { message: resp+".  "+resp1, author: author, Session: session, mobile_no: mobile_no, full:full, time:x } });
+
+                              setTimeout(myFunction, 10000);
+
+                              function myFunction(){
+
+                                  window.location="/"
+
+                              }
+
+
+                          }
+                          else{
+
+                              resp="Ok! "+username+". Then, how can help you ??";
+
+                              let markup_bot=  "<tr><td class='text-right botresponsecssmaya'><img src='static/maya1.jpg' alt='Avatar' class='avatar'><small class='text-muted'>Agent:--"+x+"</small></td></tr>";
+
+                              let markup1 = "<tr><td class='text-right botresponsecss' style='line-height: 25px'>" + resp + "</td></tr>";
+
+                              document.querySelector("#tblconv");
+                              tblconv.innerHTML+=markup_bot;
+                              tblconv.innerHTML+=markup1;
+                              let scrollingElement = document.querySelector("#tbldiv");
+                              scrollingElement.scrollTo(0,5000000);
+                              document.querySelector("#messageText").value="";
+
+                              socket.emit('transcript_bot', { data: { message: resp, author: author, Session: session, mobile_no: mobile_no, full:full, time:x } });
+
+
+                          }
+
+                      return;
+                  }
+
+
+                  if(password_flag==1)
+                          message_up="*******";
+
+                  let markup_user;
+                  let markup;
+
+                  if(message !=''){
+
+                      d = new Date();
+                      full=formatDate(d, "d MMM yyyy");
+                      x = formatDate(d, "dddd h:mmtt");
+
+
+
+                      if(password_flag==1){
+
+                                markup_user="<tr><td class='usersaycssid'><small class='text-muted'>" + author + " (You):--"+x+"<img src='static/user2.png' alt='Avatar' class='avatar-user'></small></td></tr>";
+                                markup = "<tr><td class='usersaycss'>" + message_up + "</td></tr>";
+
+                           }
+
+                      else
+                       {
+                           markup_user="<tr><td class='usersaycssid'><small class='text-muted'>" + author + " (You):--"+x+"<img src='static/user2.png' alt='Avatar' class='avatar-user'></small></td></tr>";
+                           markup = "<tr><td class='usersaycss'>" + message + "</td></tr>";
+
+                        }
+                }
+
+
+                   let tblconv=document.querySelector("#tblconv");
+                   tblconv.innerHTML+=markup_user;
+                   tblconv.innerHTML+=markup;
+
+                   let scrollingElement = document.querySelector("#tbldiv");
+                   scrollingElement.scrollTo(0,5000000);
+
+
+                   document.querySelector("#messageText").value="";
+
+
+
+                    d = new Date();
+                    full=formatDate(d, "d MMM yyyy");
+                    x = formatDate(d, "dddd h:mmtt");
+
+                    socket.emit('response', { data: { message: message, author: author, Session: session, mobile_no: mobile_no,time:x } });
+
+                    if(password_flag==1)
+                              socket.emit('transcript_user', { data: { message: message_up, author: author, Session: session, mobile_no: mobile_no, full:full, time:x } });
+                    else
+                        socket.emit('transcript_user', { data: { message: message, author: author, Session: session, mobile_no: mobile_no, full:full, time:x } });
+
+
+                }
+              })();
+
+             })();
+
+        });
+
+
+  </script>
+
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="static/css/chat.css">
+
+
+</head>
+
+<body oncontextmenu="return false;" class="main-wrapper" >
+  <div class=" main-wrapper nopadormar">
+      <div class="col-md-4 col-md-offset-4 col-xl-4 col-xl-offset-4 col-lg-4 col-lg-offset-4 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 section main-wrapper">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 section nopadormar main-wrapper " id="chat-base" >
+
+
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 round " id="chat-header" >
+              <table>
+                <td><a href="https://openweathermap.org/"><img class="imglogo round" src="static/weather1.jpg"></a></td>
+              </table>
+
+            </div>
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadormar">
+
+              <div class="col-md-12  col-xl-12 col-lg-12 col-sm-12 col-xs-12 nopadormar" id="button-container">
+                <div class="col-md-2 col-xl-2 col-lg-2 col-sm-2 col-xs-2 pos_center nopadormar" id="eng-div">
+                  <button class="btn btn-info pos_center refresh" type="button" id="english" >English</span></button>
+                </div>
+
+                <div class="col-md-2 col-xl-2 col-lg-2 col-sm-2 col-xs-2 pos_center nopadormar"></div>
+                <div class ="text-center col-md-3 col-xl-3 col-lg-3 col-sm-3 col-xs-3 pos_center nopadormar" id="displayDiv"  >
+                  <strong>Timer:180</strong>
+                </div>
+                <div class="col-md-2 col-xl-2 col-lg-2 col-sm-2 col-xs-2 pos_center nopadormar" id="ref" >
+                  <button class="btn btn-info pos_center refresh" type="button" id="reset" >Refresh</span></button>
+                </div>
+
+              </div>
+
+
+              <div class="col-12 col-md-12 col-lg-12 col-sm-12 col-xs-12" id="tbldiv">
+
+                <table id="tblconv" class="table" >
+                </table>
+              </div>
+            </div>
+            <span class="border border-dark" id="send-container" >
+              <div class=" col-12 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadormar roundrev" id="send-layout" >
+
+                <div class="col-md-8 col-lg-8 col-sm-8 col-xs-8 nopadormar" >
+                  <input type="text" class="form-control" placeholder="Enter Message" id="messageText" autofocus/>
+                </div>
+                <div class="col-md-1 col-lg-1 col-sm-1 col-xs-1 nopadormar"></div>
+                <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3 nopadormar" >
+                  <span class="input-group-btn">
+                    <button class="btn btn-success" type="button" id="sendMessage" ><span>SEND </span><span class="glyphicon glyphicon-send " ></span></button>
+                  </span>
+                </div>
+
+              </div>
+            </span>
+
+        </div>
+      </div>
+
+  </div>
+</body>
+
+</html>

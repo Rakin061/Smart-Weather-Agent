@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "florist-shop-5a5b0",
+  "private_key_id": "93e8784803c81240765c86d62c789560e9fb08e3",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQD043vH5onYrJRU\n3ifD71H88XIXhlRZ77upzLLzpnaLxmc2RIgJAe3EbXwJ/4of32GBFSg81ZU2Lzim\nSdsPDtHgbY9tU24QfyxYF8IKxTlgC3WcOeM+vuRGQIpen95mDIyxYNQayXFfE3wu\nMZeRzfgC2X3q6xo2GXRYSj99CZwt5l8vm/tK4AxuT0zkpAllztQIAi0qRyBAJ7HL\npDRmOTuRiJa1wNVv9p7TgKmdsbLQ6i5u/WJSUUkCcbck3uGF4c7vZesit30+Wnu2\nUxwhBta/nmwSJrd3i2dT4KTCDNlpiz2Vkscdb0SPbAjV5dLSAfbTgdk085BjmXYt\nWuW8T9IzAgMBAAECggEAR1h9SBSY5YkGICGnGTUAwH5BfKwUqC0pkgNCwaymTfus\nN0nJDkLDGF7DbBBImBeXCyn0UqDxO1uPmBbdXOo26DlTN4k+gEzkyPeG/2dNW3eL\nOMw+shmgXP1RstbFzxpp5QWuVe2Je6csHzMwkvicgIwH3OjI9qj81fovvAiQOWia\nOPqNzZvwpbQyH302Dn17SUjo3WYs2xw0JAzLvtMnRvmsPQmrO+IAK+QRn8MWsHOy\nc4JODzzggyhTTrvBiSCuTrGYzvcoapdb6IHHaGjstG+tWC0RWWV/vfN33BVfdRum\npkYzLMLCdWXw1aPev8ubtHhiPeGbQSMTaI2eIuyKBQKBgQD+yvFi3l8enn5sC4Hi\n2/jzKQjUH3ING7yewyPbzkMHFQR2ien5NVePeQYbHwbn6mdIvRIzhfMSoOrbG6ue\nz4YHTSN61sPoHSBppdlojwJZbQd/0ih8d0DLyta9l4RSvixGnYADtbmohuCLshAI\ntFgh1VOy2UQFlqNBiSzQ/Rt65QKBgQD2DIbyfp7yA17jacxM5uCx2Lrn+JPDLnyU\n2ZNCqC+5A1uqQR5aa+6FHxfBSso21PgHO0pj1q+kCRCfx+rSZcZ6rN99YbuWO4rf\nQfXx8MPsVxwJmD5n9t/jF8fu0/TmZNu/LINJw6WcddbRH+/7oo/+z3rkh4taXK5i\n+7th3hEPNwKBgQCrEtIeQxZ0tZBGtTdBfdbaVSvzWSW3vW7Y3kceV5BTmf4EJTdu\nty0STP0Xiq6VWqJ8iU5GP+LkGB14fkyt9cKU9msjGD4zhBL2PIAMHzFBn94QKag7\nYcqkyo2CgNA8yilqRGfmlcaRa/YqdaUkYwpltRlclVqBshHtd9AahkdELQKBgEc3\nXwPnRGg2M4vNPpXvqY+wdIDaASLYXLTUuPvtJEr/vtNrn7Z6UQJ0+nI3DIqMX/Hv\n5ls5c4MeIJKu0bfuP2GYkeN/m0UjnNF8DQznLD5HBFV+nGmJGkpnwrXM4bCh9rzB\nzIpYN6IutWu4O8Twy47sTNzCosIX213JEPaFyRhHAoGBAKLdYltBSn3sK4NP7WP5\n9Gty1JXZaJ1OuyOjms8A/x3avr0DjdIq8lewxAHK4JFzcT3zkQ5XXCWzsWaCPmbU\ntm+iKVT9yXSPKuNHzK2iHBt9RN8iCYfp84jYVXiJmo0Z72F+XLkOczHntD+jhnss\nZ6RcZlJ0yEtteH0om5dSKpkR\n-----END PRIVATE KEY-----\n",
+  "client_email": "weather-agent@florist-shop-5a5b0.iam.gserviceaccount.com",
+  "client_id": "103168788197906504592",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/weather-agent%40florist-shop-5a5b0.iam.gserviceaccount.com"
+}

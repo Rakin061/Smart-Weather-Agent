@@ -1,0 +1,164 @@
+
+
+#login-header{
+    width:60.5vh ;
+}
+.imglogo {
+    height:19vh;
+    width: 60.5vh;
+    margin-left: -1em;
+    /*margin-right: 3em;*/
+
+    /*margin-bottom: 2%;*/
+}
+#middle-base{
+    width: 60.5vh;
+}
+#main-div{
+    margin-bottom:5vh;
+    font-family:'Tangerine', serif;
+    font-weight:300;
+    color: #1c355e;
+    margin:auto;
+    text-align: center;
+    font-size:4.5vh;
+}
+#div-name-inp{
+    margin-bottom:2vh;
+    margin-bottom:3vh;
+}
+
+#nickname{
+    height:6vh;
+    width:40vh;
+    font-size:2vh;
+}
+
+#div-cont-inp{
+    margin-bottom:2vh;
+    height:6vh;
+    width:40vh;
+}
+#box{
+    box-sizing : border-box;
+    margin-top: 10px;
+    padding-left: 8vh;
+}
+#div-chat{
+    margin-top:-3vh;
+    margin-bottom:5vh;
+}
+#credit-div{
+    min-height: 2vh;
+    width: 60.5vh;
+    padding-top:2vh;
+    padding-bottom:0;
+    margin-bottom:0;
+    font-family:Courier;
+    font-size:2vh;
+    color:#820402;
+    background-color:#e8e9ed;
+}
+#strng{
+    color:#7d8084;
+}
+#mobile{
+    height:6vh;
+    width:40vh;
+    font-size:2vh;
+}
+#Enter{
+    font-size:3vh;
+    margin-top:30px;
+    margin-bottom:1vh;
+    background-color:#1E61AF;
+    height:8vh;
+    width:40vh;
+}
+#sec-div{
+    margin-bottom:5vh;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #1c355e;
+    opacity: 5;
+    font-weight:300;
+    font-size:2vh;
+}
+
+.text-container{
+    margin-bottom:2vh;
+    margin:auto;
+    text-align: center;
+}
+.position-center{
+    margin-top:5%;
+    text-align: center;
+    height: 12vh;
+    /*max-width: 12vh;*/
+    border-radius: 20vh;
+}
+
+.ch-header{
+    height: 19vh;
+    background-color:#1E61AF;
+}
+
+.round {
+    border-radius: 10px 10px 0px 0px;
+}
+
+.middle-content{
+    /*background-image: url("../weather.jpg");*/
+    height: 70vh;
+    /*width: 100vh;*/
+    background-color:#ffffff;
+    opacity: 0.9;
+}
+
+
+.roundrev {
+    border-radius: 0px 0px 10px 10px;
+}
+
+.powerdby {
+    height:2vh;
+    width:10vh;
+    font-weight:200;
+}
+
+html, body {height: 100%;}
+
+#content, .container, .span9
+{
+    height:100%;
+    /*width: 100%;*/
+}
+
+.fill {
+     min-height: 100%;
+     /*height: 100%;*/
+
+ }
+
+#frm-login{
+    margin-left:10%;
+    margin-right:10%;
+    display:block;
+    margin-top:2vh;
+}
+
+
+.section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.pos_center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
