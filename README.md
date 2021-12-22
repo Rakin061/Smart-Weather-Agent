@@ -88,11 +88,11 @@ Python >= 3.8
 * **If error occurred using any socketio dependencies. Just uninstall python-socketio and reinstall it again !!**
 * **Add working directory in the configuration otherwise chat history will not be created**
 
-##Uwsgi Server:
+## Uwsgi Server:
 
 * uwsgi --master --https :5003,foobar.crt,foobar.key --http-websockets  --gevent 1000 --wsgi-file server.py --callable app
 
-It is highly encouraged to run the application in virtual environment. 
+### It is highly encouraged to run the application in virtual environment. 
 
 # Regards, 
 
