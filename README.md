@@ -1,15 +1,12 @@
 
 
-														=======================
-														   Smart-Weather-Agent
-														=======================
-														
-								/**
-								 * @license Copyright (c) 2021, @Salman Rakin, Dept. of CSE, BUET. All rights reserved.
-								 */											
+        =======================
+        Smart-Weather-Agent
+        =======================
 
-#Smart-Weather-Agent
-===================
+
+# Smart-Weather-Agent
+
 
 Smart Weather Agent is a NLP based specialized Chatbot for providing weather information for different geographic locations. This application is a python implementation
 which actually works as a wrapper over[OpenWeathermapAPI](https://openweathermap.org/api) that stimulates HCI (Human Computer Interaction) in a way that user can interact
@@ -17,22 +14,21 @@ with the Agent instead of simply calling the Weather APIs. This application extr
 [endpoint](https://openweathermap.org/current) for getting back all the necessary weather parameters as JSON from the API. Finally, based on the response back from the API, 
 an NLP based speech has been built to send as the final response to the user with meaningful weather information!!
 
-#Example
-=============================
+# Example
 
->User: Tell me the weather in Dhaka today  ?
-Weather-Agent: Today the weather in Dhaka is Haze and the temperature is 22 C. Thanks !!
-User: What about Tokyo  ?
-Weather-Agent: Today the weather in Tokyo is clear and the temperature is 5.6 C. Thanks !!
+        User: Tell me the weather in Dhaka today  ?
+        Weather-Agent: Today the weather in Dhaka is Haze and the temperature is 22 C. Thanks !!
+        User: What about Tokyo  ?
+        Weather-Agent: Today the weather in Tokyo is clear and the temperature is 5.6 C. Thanks !!
 
 
-#Workflow of the Application
-=============================
+# Workflow of the Application
+
 
 Smart-Weather-Agent has been designed as a three tier architecture where this application lies in the first block and flask-socketio has been used to 
 communicate with RESTFUL Web Services by flask Request-Response mechanism.
-    *[Dialogflow](https://cloud.google.com/dialogflow) is responsible for initializing the NLP services. 
-    *Knowledge base has been hosted to [GCP](https://cloud.google.com/)
+    * [Dialogflow](https://cloud.google.com/dialogflow) is responsible for initializing the NLP services. 
+    * Knowledge base has been hosted to [GCP](https://cloud.google.com/)
 
 [WeatherAPI-Python]() (Submodule of this repository) written as a flask web service has been placed in the second tier and acts as a middleware in between Dialogflow 
 and OpenWeatherAPI 
@@ -46,7 +42,7 @@ completing a successful response to a user.
 
 
 # Functionalities:
-===================
+
 
 1. Realtime Chatting for concurrent distinct users (Session IDs)
 2. Get response from the bot across different servers.
@@ -63,7 +59,7 @@ completing a successful response to a user.
 
 
 # Installation:
-==================
+
 
 Dev Server:
 
@@ -80,7 +76,7 @@ Uwsgi Server:
 It is highly encouraged to run the application in virtual environment. 
 
 # Regards, 
-=========
+
 Developer : Salman Rakin
 
 	
