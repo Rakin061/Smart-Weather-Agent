@@ -1,54 +1,63 @@
 
 
 														=======================
-														   CRM ChatBOT -- AVA
+														   Smart-Weather-Agent
 														=======================
-
 														
 								/**
-								 * @license Copyright (c) 2018, ERA-INFOTECH LIMITED. All rights reserved.
+								 * @license Copyright (c) 2021, @Salman Rakin, Dept. of CSE, BUET. All rights reserved.
 								 */											
 
+#Smart-Weather-Agent
+===================
+
+Smart Weather Agent is a NLP based specialized Chatbot for providing weather information for different geographic locations. This application is a python implementation
+which actually works as a wrapper over[OpenWeathermapAPI](https://openweathermap.org/api) that stimulates HCI (Human Computer Interaction) in a way that user can interact
+with the Agent instead of simply calling the Weather APIs. This application extract the required city from the user query and prepare the request url to call the 
+[endpoint](https://openweathermap.org/current) for getting back all the necessary weather parameters as JSON from the API. Finally, based on the response back from the API, 
+an NLP based speech has been built to send as the final response to the user with meaningful weather information!!
+
+#Example
+=============================
+
+>User: Tell me the weather in Dhaka today  ?
+Weather-Agent: Today the weather in Dhaka is Haze and the temperature is 22 C. Thanks !!
+User: What about Tokyo  ?
+Weather-Agent: Today the weather in Tokyo is clear and the temperature is 5.6 C. Thanks !!
 
 
-AVA is a specialized Chatbot for providing Personalized Customer Services through Smart Apps, Web and  Social Medias (E.g.Facebook). People(Customers) will feel that 
-‘Someone’ is always assigned at their services Which is not possible by engaging human support officers for a Bank.
-With the help of AI based Chat BOT Banks can easily provide the difficult jobs of support without any queue and customer will think that one person is engaged from bank for only his/her support for any time which 
-truly is not possible by traditional human in a call center.  								 
+#Workflow of the Application
+=============================
+
+Smart-Weather-Agent has been designed as a three tier architecture where this application lies in the first block and flask-socketio has been used to 
+communicate with RESTFUL Web Services by flask Request-Response mechanism.
+    *[Dialogflow](https://cloud.google.com/dialogflow) is responsible for initializing the NLP services. 
+    *Knowledge base has been hosted to [GCP](https://cloud.google.com/)
+
+[WeatherAPI-Python]() (Submodule of this repository) written as a flask web service has been placed in the second tier and acts as a middleware in between Dialogflow 
+and OpenWeatherAPI 
+  * Communicates with the Dialogflow python client used in the first tier through standard webhook protocol for getting user query. 
+  * Extracts required parameter from the user query, prepare request url for calling the OpenWeatherAPI endpoint.
+  
+Based on the response back from the API with weather data as JSON an NLP based speech has been built to send back to dialogflow as a reply to the user query 
+through communicating the flask web service and the dialogflow python client back and forth. All these three tier applications need to work harmonically for 
+completing a successful response to a user.
+
 
 
 # Functionalities:
 ===================
 
-1. Realtime Chatting for concurrent distinct users 
+1. Realtime Chatting for concurrent distinct users (Session IDs)
 2. Get response from the bot across different servers.
-3. Support for Chat Transcripts ...
-4. Admin Panel with statistics support added..
-5. Training of the bot through admin panel!!
-6. Login by entering valid Mobile Number and Name
-7. Conversation Language options should be English and Bangla
-8. Conversation Refreshing option
-9. Admin panel for viewing unanswered questions and train for static un-chained questions responses 
-10. BOT will try to keep users in a perfect track with a guided conversation tour but BOT will be capable to answer any open question within the scope.
-11.	Response generation from linking with databases for some defined questions
-12.	Inactive session waiting timer and alert and finally auto stop option after a defined inactive period
-13.	Conversation Archiving and monitoring
-
-
-# Features:
-=============
-
-1.	Login for Every User
-2.	Switch to Admin Panel Any Time
-3.	Timer Feature & Auto Logout
-4.	Language Switching Feature
-5.	Intelligence of Predicting Actual User Query
-6.	Chat History Store
-7.	Error Log
-8.	Authenticated Admin Login
-9.	Statistical Data
-10.	Interactive Instruction for Admin
-11.	Training Maya ChatBot from Admin Panel
+3. Support for **Chat Transcripts (Chat History)** added..
+4. Login by entering valid Mobile Number and UserName. No authentication needed
+5. Conversation Refreshing option
+6. Agent will try to keep users in a perfect track with a guided conversation tour but BOT will be capable to answer any open question within the scope.
+7. Response generation from linking with databases for some defined questions
+8. Inactive session waiting timer and alert and finally auto logout option after a defined inactive period
+9. Conversation Archiving and monitoring.
+10. Failed Response tracking added..
 
 
 
@@ -70,12 +79,8 @@ Uwsgi Server:
 
 It is highly encouraged to run the application in virtual environment. 
 
-Regards, 
+# Regards, 
 =========
-
 Developer : Salman Rakin
-Project Manager: Anwar Hossain
 
-Artificial Intelligence Team
-ERA-INFOTECH LIMITED.
 	
