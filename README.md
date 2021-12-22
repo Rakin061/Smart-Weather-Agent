@@ -1,7 +1,7 @@
 
 
                                             =======================
-                                            Smart-Weather-Agent
+                                              Smart-Weather-Agent
                                             =======================
 
 
@@ -9,7 +9,7 @@
 
 
 Smart Weather Agent is a NLP based specialized Chatbot for providing weather information for different geographic locations. This application is a python implementation
-which actually works as a wrapper over[OpenWeathermapAPI](https://openweathermap.org/api) that stimulates HCI (Human Computer Interaction) in a way that user can interact
+which actually works as a wrapper over [OpenWeathermapAPI](https://openweathermap.org/api) that stimulates HCI (Human Computer Interaction) in a way that user can interact
 with the Agent instead of simply calling the Weather APIs. This application extract the required city from the user query and prepare the request url to call the 
 [endpoint](https://openweathermap.org/current) for getting back all the necessary weather parameters as JSON from the API. Finally, based on the response back from the API, 
 an NLP based speech has been built to send as the final response to the user with meaningful weather information!!
@@ -84,7 +84,6 @@ completing a successful response to a user.
 Python >= 3.8
 
 ### N.B.
-* **It's highly encouraged to run the server in virtual environment**
 * **If error occurred using any socketio dependencies. Just uninstall python-socketio and reinstall it again !!**
 * **Add working directory in the configuration otherwise chat history will not be created**
 
