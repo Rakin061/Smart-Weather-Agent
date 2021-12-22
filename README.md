@@ -60,31 +60,35 @@ completing a successful response to a user.
 
 # Installation:
 
-Dev Server:
+## Dev Server:
 
-Clone the Repository:
+### Clone the Repository:
 * `git clone https://github.com/Rakin061/Smart-Weather-Agent.git`
 
-Initialize and Update the WeatherAPI Submodule
+### Initialize and Update the WeatherAPI Submodule
 * `git submodule init`
 * `git submodule update`
 
-Create Virtual Environment and install dependencies listed in requirements.txt
+### Create Virtual Environment and install dependencies listed in requirements.txt
 * `python3 -m venv virtualenv`
 * `source virtualenv/bin/Activate`
 * `pip3 install -r requirements.txt`
 
-Run the Server from terminal or other configuration environment
+### Run the Server from terminal or other configuration environment
 * `python3 server.py`
 
-Environment Variable:
+### Environment Variable:
 * `GOOGLE_APPLICATION_CREDENTIALS=API-Key/florist-shop-5a5b0-93e8784803c8.json`
 
-**It's highly encouraged to run the server in virtual environment**
-**If error occurred using any socketio dependencies. Just uninstall python-socketio and reinstall it again !!**
-**Add working directory in the configuration otherwise chat history will not be created**
+## Supported Python_Version
+Python >= 3.8
 
-Uwsgi Server:
+### N.B.
+* **It's highly encouraged to run the server in virtual environment**
+* **If error occurred using any socketio dependencies. Just uninstall python-socketio and reinstall it again !!**
+* **Add working directory in the configuration otherwise chat history will not be created**
+
+##Uwsgi Server:
 
 * uwsgi --master --https :5003,foobar.crt,foobar.key --http-websockets  --gevent 1000 --wsgi-file server.py --callable app
 
