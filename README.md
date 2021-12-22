@@ -16,10 +16,10 @@ an NLP based speech has been built to send as the final response to the user wit
 
 # Example
 
-        User: Tell me the weather in Dhaka today  ?
-        Weather-Agent: Today the weather in Dhaka is Haze and the temperature is 22 C. Thanks !!
-        User: What about Tokyo  ?
-        Weather-Agent: Today the weather in Tokyo is clear and the temperature is 5.6 C. Thanks !!
+        # User: Tell me the weather in Dhaka today  ?
+        # Weather-Agent: Today the weather in Dhaka is Haze and the temperature is 22 C. Thanks !!
+        # User: What about Tokyo  ?
+        # Weather-Agent: Today the weather in Tokyo is clear and the temperature is 5.6 C. Thanks !!
         .............
 
 
@@ -28,8 +28,8 @@ an NLP based speech has been built to send as the final response to the user wit
 
 Smart-Weather-Agent has been designed as a three tier architecture where this application lies in the first block and flask-socketio has been used to 
 communicate with RESTFUL Web Services by flask Request-Response mechanism
-    *[Dialogflow](https://cloud.google.com/dialogflow) is responsible for initializing the NLP services. 
-    *Knowledge base has been hosted to [GCP](https://cloud.google.com/)
+    * [Dialogflow](https://cloud.google.com/dialogflow) is responsible for initializing the NLP services. 
+    * Knowledge base has been hosted to [GCP](https://cloud.google.com/)
 
 [WeatherAPI-Python]() (Submodule of this repository) written as a flask web service has been placed in the second tier and acts as a middleware in between Dialogflow 
 and OpenWeatherAPI 
