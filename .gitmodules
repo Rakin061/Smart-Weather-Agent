@@ -1,0 +1,3 @@
+[submodule "WeatherAPI-Flask"]
+	path = WeatherAPI-Flask
+	url = https://github.com/Rakin061/WeatherAPI-Flask.git
