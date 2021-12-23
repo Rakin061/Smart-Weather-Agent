@@ -14,14 +14,14 @@ with the Agent instead of simply calling the Weather APIs. This application extr
 [endpoint](https://openweathermap.org/current) for getting back all the necessary weather parameters as JSON from the API. Finally, based on the response back from the API, 
 an NLP based speech has been built to send as the final response to the user with meaningful weather information!!
 
-# Example
+# Example [Chcek the image...](https://github.com/Rakin061/Smart-Weather-Agent/blob/master/static/Screenshot.png)
+
 
         # User: Tell me the weather in Dhaka today  ?
         # Weather-Agent: Today the weather in Dhaka is Haze and the temperature is 22 C. Thanks !!
         # User: What about Tokyo  ?
         # Weather-Agent: Today the weather in Tokyo is clear and the temperature is 5.6 C. Thanks !!
         .............
-### [Chcek the image of the application......](https://github.com/Rakin061/Smart-Weather-Agent/blob/master/static/Screenshot.png)
 
 
 
