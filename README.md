@@ -21,8 +21,7 @@ an NLP based speech has been built to send as the final response to the user wit
         # User: What about Tokyo  ?
         # Weather-Agent: Today the weather in Tokyo is clear and the temperature is 5.6 C. Thanks !!
         .............
-
-## [Chcek the example image of the application......](https://github.com/Rakin061/Smart-Weather-Agent/blob/master/static/Screenshot.png)
+### [Chcek the image of the application......](https://github.com/Rakin061/Smart-Weather-Agent/blob/master/static/Screenshot.png)
 
 
 
